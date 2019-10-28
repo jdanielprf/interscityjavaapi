@@ -1,64 +1,96 @@
 
-### API JAVA para InterSCity
+# API JAVA para InterSCity
 
 Esta biblioteca permite manipular recursos, capacidades e dados como objetos Java.
 
-### Importar a biblioteca
+## Importar a biblioteca
 Importe a biblioteca. 
-Faça a instanciação por meio da classe InterSCityManagerFactory
+Instancie a classe **InterSCityManagerFactory** passando como argumento a url da plataforma.
 
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 ```
 
-### Gerenciando recursos
+## Gerenciando recursos
 
 Para manipular os recursos é necessario obter uma instância da classe DataManager por meio da classe InterSCityManagerFactory. Para isso é necessário usar o método **capacities()** .
 
+#### Resource class
 
-##Obter um recurso pelo UUID
+```java
+public class Resource implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private String uuid;
+	private Double lat;
+	private Double lon;
+	private String description;
+	private String capabilities[];
+	private String status = "active";
+	...
+}
+```
+
+#### Obter um recurso pelo UUID
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 	rest.resources().getResource("61f97d1f-0531-4ad2-b30a-6c758d576895");
 ```
 
-##Obter um recurso por descrição com status ativo
+#### Obter um recurso por descrição com status ativo
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 	rest.resources().findResourceActiveByDescription("mob-mail");
 ```
 
-##Obter todos os recursos
+#### Obter todos os recursos
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 	rest.resources().getAll();
 ```
 
 
-##Obter todos os recursos que contem atuadores
+#### Obter todos os recursos que contém atuadores
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 	rest.resources().getAllResouceWithActuators();
 ```
 
 
-##Obter todos os recursos que contem sensores
+#### Obter todos os recursos que contém sensores
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 	 rest.resources().getAllResouceWithSensors();
 ```
 
-### Gerenciando capacidades 
+## Gerenciando capacidades 
 Para manipular os recursos é necessario obter uma instância da classe DataManager por maio da classe InterSCityManagerFactory. Para isso é necessário usar o método **capacities()** .
 
-## lista de capacidades
+#### Capability class
+
+```java
+public class Capability {
+	
+	public static String CAPABILITY_TYPE_SENSOR="sensor";
+	public static String CAPABILITY_TYPE_ACTUATOR="actuator";
+	
+	private String id;
+	private String name;
+	private String description;
+	private String type;
+	...
+}
+```
+
+
+#### lista de capacidades
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 	Capability[] list = rest.capabilities().getAll();
 ```
 
 
-## criar uma nova capacidade
+#### criar uma nova capacidade
 Utilize os atributos estatiscos para obter o valor das constantes do InterSCity.
 
 Para setar o tipo da capacidade use as constantes: CapabilitiesManager.TYPE_SENSOR e CapabilitiesManager.TYPE_ACTUATOR
@@ -68,14 +100,14 @@ Para setar o tipo da capacidade use as constantes: CapabilitiesManager.TYPE_SENS
 	
 ```
 
-## remover capacidade
+#### remover capacidade
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 	rest.capabilities().dateleCapability("temperatura");
 		
 ```
 
-## update capacidade
+#### update capacidade
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 	rest.capabilities().updateCapability("rele", "rele da lampada da sala", CapabilitiesManager.TYPE_ACTUATOR);	
@@ -84,16 +116,27 @@ Para setar o tipo da capacidade use as constantes: CapabilitiesManager.TYPE_SENS
 
 
 
-### Gerenciando dados
+## Gerenciando dados
 
-## Obter todos os dados de um recurso 
+#### CapabilityValue class
+
+```java
+public class CapabilityValue {
+	private String name;
+	private Object value;
+	private String timeStamp;
+	...
+}
+```
+
+#### Obter todos os dados de um recurso 
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 	List<CapabilityValue> listData = rest.data().getData("81410f03-6ae9-46ab-ae8c-6854f732485a", "data");
 	
 ```
 
-## Enviar dados referente a um recurso 
+#### Enviar dados referente a um recurso 
 
 ```java
 	InterSCityManagerFactory ic = new InterSCityManagerFactory("...");
@@ -110,9 +153,6 @@ Para setar o tipo da capacidade use as constantes: CapabilitiesManager.TYPE_SENS
 		ic.data().sendDataResource("d8b34e32-30a4-4733-bfd2-02f0d258c256", list);
 	
 ```
-
-
-
 
 
 
