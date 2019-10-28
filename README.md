@@ -3,6 +3,8 @@
 
 Esta biblioteca permite manipular recursos, capacidades e dados como objetos Java.
 
+[Download](https://github.com/jdanielprf/interscityjavaapi/blob/master/lib/interscityjavaapi.jar)
+ 
 ## Importar a biblioteca
 Importe a biblioteca. 
 Instancie a classe **InterSCityManagerFactory** passando como argumento a url da plataforma.
