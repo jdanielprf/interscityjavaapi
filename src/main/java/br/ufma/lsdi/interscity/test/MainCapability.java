@@ -3,7 +3,6 @@ package br.ufma.lsdi.interscity.test;
 import br.ufma.lsdi.interscity.beans.Capability;
 import br.ufma.lsdi.interscity.mamager.CapabilitiesManager;
 import br.ufma.lsdi.interscity.mamager.InterSCityManagerFactory;
-import br.ufma.lsdi.interscity.mamager.ResourceManager;
 
 public class MainCapability {
 	public static String URL = "http://cidadesinteligentes.lsdi.ufma.br/eq1";

@@ -20,12 +20,19 @@ public class Main {
 		}
 		
 	}
+	@SuppressWarnings("unused")
 	public void teste() {
 		
 		System.out.println("=================");
-		System.out.println(rest.resources().getResource("61f97d1f-0531-4ad2-b30a-6c758d576895"));
+		Resource resource = rest.resources().getResource("61f97d1f-0531-4ad2-b30a-6c758d576895");
+		String[] capabilities = resource.getCapabilities();
+		
+		Resource[] resources = rest.resources().getAll();
+		
+		System.out.println();
 		System.out.println("=================");
-		System.out.println(rest.resources().findResourceActiveByDescription("mob-mail"));
+	//	Resource[] resources = rest.resources().findResourceActiveByDescription("meu-recurso");
+		System.out.println();
 		System.out.println("=================");
 //		
 //		Resource r=new Resource();

@@ -42,7 +42,7 @@ public class DataManager {
 		values.setData(list);
 		SendData request=new SendData();
 		request.setData(values);
-		GetResources resposta = restTemplate.postForObject(url+"/adaptor/resources/"+uuid+"/data/capability", request, GetResources.class);
+		restTemplate.postForObject(url+"/adaptor/resources/"+uuid+"/data/capability", request, GetResources.class);
 		
 	}
 
@@ -63,7 +63,7 @@ public class DataManager {
 		values.setData(list);
 		SendData request=new SendData();
 		request.setData(values);
-		GetResources resposta = restTemplate.postForObject(url+"/adaptor/resources/"+uuid+"/data", request, GetResources.class);
+		restTemplate.postForObject(url+"/adaptor/resources/"+uuid+"/data", request, GetResources.class);
 	}
 	
 	public List<CapabilityValue> getData(String uuid) {

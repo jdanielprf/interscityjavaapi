@@ -18,7 +18,7 @@ public class MainData {
 		System.out.println("=================");
 		for (Iterator<CapabilityValue> iterator = listData.iterator(); iterator.hasNext();) {
 			CapabilityValue capabilityValue = (CapabilityValue) iterator.next();
-		//	System.out.println(capabilityValue);
+			System.out.println(capabilityValue);
 		}
 		System.out.println("===============");
 		System.out.println("===============");
