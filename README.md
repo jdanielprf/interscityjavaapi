@@ -89,14 +89,14 @@ public class Capability {
 ```
 
 
-#### lista de capacidades
+#### Obter a lista de todas as capacidades
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
 	Capability[] list = rest.capabilities().getAll();
 ```
 
 
-#### criar uma nova capacidade
+#### Criar uma capacidade
 Utilize os atributos estático para obter o valor das constantes do InterSCity.
 Informe o nome, descição e o tipo da capacidade.
 Para setar o tipo da capacidade use as constantes: CapabilitiesManager.TYPE_SENSOR e CapabilitiesManager.TYPE_ACTUATOR
@@ -106,7 +106,7 @@ Para setar o tipo da capacidade use as constantes: CapabilitiesManager.TYPE_SENS
 	
 ```
 
-#### remover capacidade
+#### Remover capacidade
 Informe o nome da capacidade que deseja remover.
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
@@ -114,7 +114,7 @@ Informe o nome da capacidade que deseja remover.
 		
 ```
 
-#### update capacidade
+#### Atualizar capacidade
 Informe o nome do recurso que deseja atualizar e depois os novos valoes para a descrição e o tipo da capacidade.
 ```java
 	InterSCityManagerFactory rest=new InterSCityManagerFactory("...");
@@ -149,7 +149,7 @@ Informe o UUID do recurso e a descrição.
 
 #### Enviar dados referente a um recurso 
 
-Crie uma lista de CapabilityValue, não esqueça que todos os valores não podem ser nulos.
+Crie uma lista de **CapabilityValue**, não esqueça que todos os valores não podem ser nulos.
 
 ```java
 	InterSCityManagerFactory ic = new InterSCityManagerFactory("...");
