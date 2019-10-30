@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import br.ufma.lsdi.interscity.beans.CapabilityValue;
-import br.ufma.lsdi.interscity.mamager.DateManager;
-import br.ufma.lsdi.interscity.mamager.InterSCityManagerFactory;
+import br.ufma.lsdi.interscity.manager.DateUtil;
+import br.ufma.lsdi.interscity.manager.InterSCityManagerFactory;
 
 public class MainData2 {
 	public static void main(String[] args) {
@@ -17,7 +17,7 @@ public class MainData2 {
 			CapabilityValue value=new CapabilityValue();
 			value.setName("ufma_combed_current");
 			value.setValue(i);
-			value.setTimeStamp(DateManager.convertDate(new Date()));
+			value.setTimeStamp(DateUtil.convertDate(new Date()));
 			list.add(value);
 		}
 		

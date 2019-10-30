@@ -1,7 +1,7 @@
 package br.ufma.lsdi.interscity.test;
 
 import br.ufma.lsdi.interscity.beans.Resource;
-import br.ufma.lsdi.interscity.mamager.InterSCityManagerFactory;
+import br.ufma.lsdi.interscity.manager.InterSCityManagerFactory;
 
 public class Main {
 	InterSCityManagerFactory rest=new InterSCityManagerFactory(MainCapability.URL);

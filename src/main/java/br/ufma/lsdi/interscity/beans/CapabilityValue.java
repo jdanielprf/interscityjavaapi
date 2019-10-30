@@ -1,6 +1,12 @@
 package br.ufma.lsdi.interscity.beans;
 
-public class CapabilityValue {
+import java.io.Serializable;
+
+public class CapabilityValue implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private Object value;
 	private String timeStamp;

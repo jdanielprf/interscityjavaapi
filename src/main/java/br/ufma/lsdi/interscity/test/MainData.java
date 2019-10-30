@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.ufma.lsdi.interscity.beans.CapabilityValue;
 import br.ufma.lsdi.interscity.beans.Resource;
-import br.ufma.lsdi.interscity.mamager.InterSCityManagerFactory;
+import br.ufma.lsdi.interscity.manager.InterSCityManagerFactory;
 
 public class MainData {
 	public static void main(String[] args) {

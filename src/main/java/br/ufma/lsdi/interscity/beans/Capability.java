@@ -1,7 +1,13 @@
 package br.ufma.lsdi.interscity.beans;
 
-public class Capability {
+import java.io.Serializable;
+
+public class Capability implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static String CAPABILITY_TYPE_SENSOR="sensor";
 	public static String CAPABILITY_TYPE_ACTUATOR="actuator";
 	

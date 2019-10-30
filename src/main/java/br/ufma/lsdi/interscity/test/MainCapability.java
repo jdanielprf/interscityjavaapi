@@ -1,14 +1,20 @@
 package br.ufma.lsdi.interscity.test;
 
 import br.ufma.lsdi.interscity.beans.Capability;
-import br.ufma.lsdi.interscity.mamager.CapabilitiesManager;
-import br.ufma.lsdi.interscity.mamager.InterSCityManagerFactory;
+import br.ufma.lsdi.interscity.manager.CapabilitiesManager;
+import br.ufma.lsdi.interscity.manager.InterSCityManagerFactory;
 
 public class MainCapability {
 	public static String URL = "http://cidadesinteligentes.lsdi.ufma.br/eq1";
 
 	public static void main(String[] args) {
 		InterSCityManagerFactory re = new InterSCityManagerFactory(URL);
+		re.capabilities().createCapability("teste", "Teste", Capability.CAPABILITY_TYPE_SENSOR);
+		
+	}
+	
+	public void teste() {
+InterSCityManagerFactory re = new InterSCityManagerFactory(URL);
 		
 		Capability[] list = re.capabilities().getAll();
 		
@@ -23,6 +29,5 @@ public class MainCapability {
 		re.capabilities().dateleCapability("daniel");
 		
 		//re.capability().getCapability("daniel");
-		
 	}
 }

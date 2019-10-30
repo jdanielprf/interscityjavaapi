@@ -171,19 +171,110 @@ Crie uma lista de **CapabilityValue**, não esqueça que todos os valores não p
 ```java
 	InterSCityManagerFactory ic = new InterSCityManagerFactory("...");
 		
-		List<CapabilityValue> list=new ArrayList<CapabilityValue>();
-		for (int i = 0; i < 10; i++) {
+	List<CapabilityValue> list=new ArrayList<CapabilityValue>();
+	for (int i = 0; i < 10; i++) {
 			CapabilityValue value=new CapabilityValue();
 			value.setName("ufma_combed_current");
 			value.setValue(i);
 			value.setTimeStamp(DateManager.convertDate(new Date()));
 			list.add(value);
-		}
+	}
 		
-		ic.data().sendDataResource("d8b34e32-30a4-4733-bfd2-02f0d258c256", list);
+	ic.data().sendDataResource("d8b34e32-30a4-4733-bfd2-02f0d258c256", list);
 	
 ```
 
 
 
+# Exemplo: monitoramento do uso de memória de um computador
 
+Este exemplo consite em monitorar pelo InterSCIty o consumo de memória de um computador.
+
+### Criar capacidade e recurso
+Como o dado que deseja-se monitorar é o consumo de memória é necessário criar um capacidade referente ao uso de memória. Depois cria-se um recurso que representa o computador que estamos monitorando, também é colocada uma descrição e a localização do recurso(computador). 
+Depois de obter a informação sobre a memoria disponivel em um computador devemos emcapsular o recurso em um objeto do tipo ```CapabilityValue
+
+```java
+		SingletonManager.init( "http://cidadesinteligentes.lsdi.ufma.br/eq1");
+		SingletonManager.get().capabilities().createCapability("jd_memory", "memoria do computador",
+				Capability.CAPABILITY_TYPE_SENSOR);
+		Resource resource = new Resource();
+		resource.setDescription("pc_jose_daniel");
+		resource.setCapabilities(new String[] { "jd_memory" });
+		resource.setLat(558251.0);
+		resource.setLon(-44.308325);
+		SingletonManager.get().resources().createResource(resource);
+
+```
+
+
+### Enviar dados
+
+Primeiro é necessário buscar o recurso, normalmente isso é feito pelo UUID do recurso. Mas, neste caso, vamos localizar o recurso pela descrição. Como a descrição não é unica, o interscity devolve uma lista de recurso que possuem essa descrição.
+Depois é necessário encapsular o dado em um objeto do tipo ```CapabilityValue```. Depois é só enviar o objeto!
+
+```java
+
+		SingletonManager.init( "http://cidadesinteligentes.lsdi.ufma.br/eq1");
+		Resource resources[]=SingletonManager.get().resources().findResourceActive("description", "pc_jose_daniel");
+		
+		while(resources.length>0) {
+			try {
+				int mb = 1024*1024;
+				
+			
+	            com.sun.management.OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean)
+	            java.lang.management.ManagementFactory.getOperatingSystemMXBean();
+	            long physicalMemorySize = os.getTotalPhysicalMemorySize();
+	            long physicalfreeMemorySize = os.getFreePhysicalMemorySize();
+
+				long men = (physicalMemorySize-physicalfreeMemorySize)/mb;
+				CapabilityValue value = new CapabilityValue();
+				value.setName("jd_memory");
+				value.setValue(men);
+				value.setTimeStamp(DateUtil.convertDate(new Date()));
+				SingletonManager.get().data().sendDataResource(resources[0].getUuid(), value);
+				Thread.sleep(1000);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+```
+		
+### Enviando dados para o InterScity por meio do ContextNet
+
+```java
+
+SingletonManager.init( "http://192.168.0.26:8000");
+		Resource resources[]=SingletonManager.get().resources().findResourceActive("description", "pc_jose_daniel");
+		
+		// config context net
+		ContextNetSingleton.init("192.168.0.26", 5500);
+		ContextNetSingleton.get().connect();
+		while(resources.length>0) {
+			try {
+				int mb = 1024*1024;
+				com.sun.management.OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean)
+	            java.lang.management.ManagementFactory.getOperatingSystemMXBean();
+	            long physicalMemorySize = os.getTotalPhysicalMemorySize();
+	            long physicalfreeMemorySize = os.getFreePhysicalMemorySize();
+
+				long men = (physicalMemorySize-physicalfreeMemorySize)/mb;
+				CapabilityValue value = new CapabilityValue();
+				value.setName("jd_memory");
+				value.setValue(men);
+				
+				value.setTimeStamp(DateUtil.convertDate(new Date()));
+				ArrayList<CapabilityValue> list=new ArrayList<CapabilityValue>();
+				list.add(value);
+				ContextNetSingleton.get().sendCapabilityValues(resources[0].getUuid(), list);
+		
+				Thread.sleep(1000);
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+
+```
